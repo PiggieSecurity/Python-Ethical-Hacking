@@ -1,4 +1,4 @@
-from scapy.all import *
+oifrom scapy.all import *
 import sys
 import signal
 import os
@@ -36,10 +36,10 @@ def packetsniffer(packet):
     except:
         SSID = ""
         SSIDSize = 0
-    #check voor Authentication frame (type = A, subtype =8)
+    #check voor Beacon frame (type = 0, subtype =8)
     if packet[0].type == 0:
         ST = packet[0][scapy.layers.Dot11].subtype
-        if str(ST) == "A" and SSID != "" and DSTMAC.lower() == "ff:ff:ff:ff:ff:ff":
+        if str(ST) == "8" and SSID != "" and DSTMAC.lower() == "ff:ff:ff:ff:ff:ff":
             pakketje = packet[scapy.layers.Dot11Elt]
             cap = packet.sprintf("{Dot11Beacon:%Dot11Beacon.cap%"
                                 "Dot11ProbeResp:%Dot11ProbeResp.cap%}").split('+')
